@@ -8,6 +8,8 @@ import {
     Paper,
     Divider
 } from '@mui/material';
+import { useNavigate } from 'react-router';
+import { postLogin } from '../actions';
 
 const styles = {
     paperContainer: {
@@ -22,21 +24,23 @@ const styles = {
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-    const handleSignIn = () => {
-        console.log("SIGN IN DI CLICK")
+    const handleSignIn = async (e) => {
+       const response = await postLogin(email, password)
+       if(localStorage.getItem("access_token")) {
+           navigate("/", {})
+       }
     }
 
     const handleEmail = (e) => {
         let emailValue = e.target.value;
         setEmail(emailValue)
-        console.log(email)
     }
 
     const handlePassword = (e) => {
         let passwordValue = e.target.value;
         setPassword(passwordValue)
-        console.log(password)
     }
     
     return(
@@ -44,10 +48,14 @@ function Login() {
             <Grid container spacing={8} justifyContent="center" p={12} minHeight="80vh">
                 <Grid container item xs={12} justifyContent ="flex-end" spacing={3}>
                     <Grid item>
-                        <Button color="primary" variant="contained" size="large">Sign In</Button>
+                        <Button color="primary" variant="contained" size="large" onClick={() => {
+                            navigate("/login", {});
+                        }}>Sign In</Button>
                     </Grid>
                     <Grid item>
-                        <Button color="primary" variant="contained" size="large">Register</Button>
+                        <Button color="primary" variant="contained" size="large" onClick={() => {
+                            navigate("/register", {});
+                        }}>Register</Button>
                     </Grid>
                 </Grid>
 

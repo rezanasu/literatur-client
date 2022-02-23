@@ -43,10 +43,8 @@ function Home() {
                 <Typography variant="h6" p={2}>CURRENTLY READING</Typography>
                 <Grid container>
                     <Grid item xs>
-                        <BookCard />
                     </Grid>
                     <Grid item xs>
-                        <BookCard />
                     </Grid>
                     
                 </Grid>

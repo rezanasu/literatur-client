@@ -1,19 +1,27 @@
-import React from 'react';
+import React, {createContext} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux'
-import store from './store'
 import {BrowserRouter as Router} from 'react-router-dom';
+
+export const RootContext = createContext();
+const Provider = RootContext.Provider;
+const state = {
+  access_token: localStorage.getItem("access_token"),
+  books: [],
+  user_books: [],
+  user_favourites: [],
+  user_wishlist: []
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store='./store'>
-      <Router>
+    <Router>
+      <Provider value={state}>
         <App /> 
-      </Router>
-    </Provider>
+      </Provider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
